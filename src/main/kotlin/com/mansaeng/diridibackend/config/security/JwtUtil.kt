@@ -26,17 +26,16 @@ class JwtUtil(
     fun getAllClaimsFromAccessToken(accessToken: String): Claims =
         Jwts.parserBuilder().setSigningKey(accessKey).build().parseClaimsJws(accessToken).body
 
-    fun getUserIdFromAccessToken(accessToken: String): Long = getAllClaimsFromAccessToken(accessToken).subject.toLong()
+    fun getUserIdFromAccessToken(accessToken: String): String = getAllClaimsFromAccessToken(accessToken).subject
 
     fun getExpirationFromAccessToken(accessToken: String): Date = getAllClaimsFromAccessToken(accessToken).expiration
 
     private fun isTokenExpired(accessToken: String): Boolean = getExpirationFromAccessToken(accessToken).before(Date())
 
     fun createAccessToken(user: User): String {
-        val claims = Jwts.claims().setSubject(user.id.toString())
         val now = Date()
         return Jwts.builder()
-            .setSubject(user.id.toString())
+            .setSubject(user.id)
             .setIssuedAt(now)
             .setExpiration(Date(now.time + accessExpiration))
             .signWith(accessKey)

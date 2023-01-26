@@ -1,11 +1,13 @@
 package com.mansaeng.diridibackend.entity.user
 
+import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
+@Document
 class User(
-    var id: Long,
+    var id: String,
     private var username: String,
     private var password: String,
     var enabled: Boolean,
