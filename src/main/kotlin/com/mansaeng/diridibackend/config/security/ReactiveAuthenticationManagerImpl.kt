@@ -1,6 +1,6 @@
 package com.mansaeng.diridibackend.config.security
 
-import com.mansaeng.diridibackend.user.service.UserService
+import com.mansaeng.diridibackend.service.UserService
 import org.springframework.security.authentication.ReactiveAuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication

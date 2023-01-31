@@ -1,3 +1,3 @@
-package com.mansaeng.diridibackend.user.dto
+package com.mansaeng.diridibackend.dto
 
 data class AuthResponse(val token: String)
