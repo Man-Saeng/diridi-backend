@@ -1,0 +1,10 @@
+POST http://localhost:8080/article
+Content-Type: application/json
+Authorization: Bearer <your-token>
+
+{
+  "title": "some title hihi",
+  "description": "대충 회귀해서 갑자기 재벌집 아들래미가 됨"
+}
+
+###
