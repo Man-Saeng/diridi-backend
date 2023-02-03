@@ -21,7 +21,7 @@ class ReactiveAuthenticationManagerImpl(private val jwtUtil: JwtUtil, private va
                 userService.findById(userId)
                     .map { user ->
                         UsernamePasswordAuthenticationToken(
-                            user.id,
+                            user,
                             null,
                             user.roles.map { role -> SimpleGrantedAuthority(role.name) })
                     }
