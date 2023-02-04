@@ -14,6 +14,7 @@ data class Article(
     val id: String? = null,
     var title: String,
     var description: String,
+    var thumbnailImageLink: String = "https://via.placeholder.com/110x165?text=Diridi",
 
     @DocumentReference
     var writer: User,
