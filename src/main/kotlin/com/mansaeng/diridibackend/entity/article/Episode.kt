@@ -15,6 +15,7 @@ data class Episode(
 
     var title: String,
     var content: String,
+    var publishedAt: LocalDateTime,
 
     @DocumentReference
     var writer: User,
