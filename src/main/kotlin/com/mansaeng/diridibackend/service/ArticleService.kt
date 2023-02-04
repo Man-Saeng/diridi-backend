@@ -12,7 +12,7 @@ class ArticleService(private val articleRepository: ArticleRepository) {
 
     fun createArticle(writer: User, createArticleRequest: CreateArticleRequest): Mono<Article> {
         val (title, description) = createArticleRequest
-        val article = Article(null, title, description, writer)
+        val article = Article(title = title, description = description, writer = writer)
         return articleRepository.save(article)
     }
 }
