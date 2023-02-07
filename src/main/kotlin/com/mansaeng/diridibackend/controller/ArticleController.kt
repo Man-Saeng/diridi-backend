@@ -28,8 +28,10 @@ class ArticleController(private val articleService: ArticleService) {
 
     @GetMapping
     fun getArticleList(
-        @RequestParam("page") skip: Int = 0, @RequestParam("take") take: Int = 10
-    ): ResponseEntity<Flux<Article>> = ResponseEntity.ok(articleService.getArticleList(skip, take))
+        @RequestParam("tag") tag: String?,
+        @RequestParam("page") skip: Int?,
+        @RequestParam("take") take: Int?
+    ): ResponseEntity<Flux<Article>> = ResponseEntity.ok(articleService.getArticleList(tag, skip ?: 0, take ?: 10))
 
     @GetMapping("/{articleId}")
     fun getArticleDetail(
