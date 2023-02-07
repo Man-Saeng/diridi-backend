@@ -1,11 +1,9 @@
 package com.mansaeng.diridibackend.entity.article
 
-import com.mansaeng.diridibackend.entity.user.User
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.mongodb.core.mapping.Document
-import org.springframework.data.mongodb.core.mapping.DocumentReference
 import java.time.LocalDateTime
 
 @Document
@@ -16,12 +14,8 @@ data class Episode(
     var title: String,
     var content: String,
     var publishedAt: LocalDateTime,
-
-    @DocumentReference
-    var writer: User,
-
-    @DocumentReference
-    var article: Article,
+    var writerId: String,
+    var articleId: String,
 
     @CreatedDate
     val createdAt: LocalDateTime = LocalDateTime.now(),
