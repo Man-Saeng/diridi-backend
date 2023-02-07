@@ -15,6 +15,7 @@ data class Article(
     var thumbnailImageLink: String = "https://via.placeholder.com/110x165?text=Diridi",
     var writerId: String,
     var episodeIds: List<String> = mutableListOf(),
+    var tags: List<String> = mutableListOf(),
 
     @CreatedDate
     val createdAt: LocalDateTime = LocalDateTime.now(),

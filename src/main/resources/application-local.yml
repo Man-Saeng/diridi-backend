@@ -6,3 +6,11 @@ spring:
     mongodb:
       uri: mongodb://diridi-local:test1234@localhost:27017
       database: diridi
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              ReactiveMongoTemplate: DEBUG

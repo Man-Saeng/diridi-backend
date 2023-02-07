@@ -10,4 +10,6 @@ import reactor.core.publisher.Flux
 interface ArticleRepository : ReactiveCrudRepository<Article, String> {
     @Query("{ id: { \$exists: true }}")
     fun findAllPaged(pageable: Pageable): Flux<Article>
+
+    fun findByTagsContaining(tag: String?, pageable: Pageable): Flux<Article>
 }
