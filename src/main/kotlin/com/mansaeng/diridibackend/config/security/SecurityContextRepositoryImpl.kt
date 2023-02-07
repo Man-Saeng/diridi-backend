@@ -24,7 +24,7 @@ class SecurityContextRepositoryImpl(private val reactiveAuthenticationManagerImp
             .flatMap { authHeader ->
                 val authToken: String = authHeader.substring(7)
                 val auth: Authentication = UsernamePasswordAuthenticationToken(authToken, authToken)
-                this.reactiveAuthenticationManagerImpl.authenticate(auth).map { SecurityContextImpl() }
+                this.reactiveAuthenticationManagerImpl.authenticate(auth).map { auth -> SecurityContextImpl(auth) }
             }
     }
 }

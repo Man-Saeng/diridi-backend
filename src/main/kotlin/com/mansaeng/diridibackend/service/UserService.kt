@@ -1,7 +1,7 @@
-package com.mansaeng.diridibackend.user.service
+package com.mansaeng.diridibackend.service
 
 import com.mansaeng.diridibackend.entity.user.User
-import com.mansaeng.diridibackend.user.repository.UserRepository
+import com.mansaeng.diridibackend.repository.UserRepository
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
 

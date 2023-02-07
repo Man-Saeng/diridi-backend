@@ -1,6 +1,6 @@
 package com.mansaeng.diridibackend.config.security
 
-import com.mansaeng.diridibackend.user.service.UserService
+import com.mansaeng.diridibackend.service.UserService
 import org.springframework.security.authentication.ReactiveAuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
@@ -21,7 +21,7 @@ class ReactiveAuthenticationManagerImpl(private val jwtUtil: JwtUtil, private va
                 userService.findById(userId)
                     .map { user ->
                         UsernamePasswordAuthenticationToken(
-                            user.id,
+                            user,
                             null,
                             user.roles.map { role -> SimpleGrantedAuthority(role.name) })
                     }
