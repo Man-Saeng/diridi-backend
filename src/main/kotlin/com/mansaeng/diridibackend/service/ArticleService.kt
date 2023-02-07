@@ -13,15 +13,18 @@ import reactor.core.publisher.Mono
 class ArticleService(private val articleRepository: ArticleRepository) {
 
     fun createArticle(writer: User, createArticleRequest: CreateArticleRequest): Mono<Article> {
-        val (title, description) = createArticleRequest
-        val article = Article(title = title, description = description, writerId = writer.id)
+        val (title, description, tags) = createArticleRequest
+        val article = Article(title = title, description = description, writerId = writer.id, tags = tags)
         return articleRepository.save(article)
     }
 
-    fun getArticleList(skip: Int, take: Int): Flux<Article> {
+    fun getArticleList(tag: String?, skip: Int, take: Int): Flux<Article> {
         val page = PageRequest.of(skip, take)
 
-        return articleRepository.findAllPaged(page)
+        return if (tag == null) articleRepository.findAllPaged(page) else articleRepository.findByTagsContaining(
+            tag,
+            page
+        )
     }
 
     fun getArticleDetailById(articleId: String): Mono<Article> = articleRepository.findById(articleId)
