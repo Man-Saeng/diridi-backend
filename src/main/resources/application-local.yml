@@ -1,0 +1,8 @@
+jwt:
+  access-secret: sampleSecretAndItMustBeOver256Bits # this must be longer than 256 bits
+  access-expiration: 86400000 # 1 day
+spring:
+  data:
+    mongodb:
+      uri: mongodb://diridi-local:test1234@localhost:27017
+      database: diridi
