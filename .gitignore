@@ -41,3 +41,6 @@ src/main/resources/application.yml
 
 # Docker build files
 docker/
+
+# Mac Filesystem
+.DS_Store
