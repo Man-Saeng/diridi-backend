@@ -1,4 +1,4 @@
-package com.mansaeng.diridibackend.dto
+package com.mansaeng.diridibackend.dto.request
 
 data class CreateArticleRequest(
     val title: String,
