@@ -1,17 +1,32 @@
-GET http://localhost:8080/episode/63e1053ab8cf1535b8455ca5?page=0&take=10
+### 작품 ID 별로 에피소드 목록 불러오기
+GET http://localhost:8080/episode?articleId=<article-id>&page=0&take=10
 Accept: application/json
 
-###
+### 에피소드 상세 불러오기
+GET http://localhost:8080/episode/<episode-id>
+Accept: application/json
+
+### 에피소드 쓰기
 POST http://localhost:8080/episode
 Content-Type: application/json
 Authorization: Bearer <your-token>
 
 {
   "title": "프롤로그",
-  "content": "대충 1화입니다. 뭐 흥미 끌 수 있는 부분으로다가.. ㅖ.. 요새 거,, 너무 길어도 안팔린대 근데 그래서 한국 레전드 프로게이머인 내가,,,",
-  "publishedAt": "2023-02-06T14:11:28.037Z",
-  "articleId": "someArticleId"
+  "content": "대충 3화입니다. 뭐 흥미 끌 수 있는 부분으로다가.. ㅖ.. 요새 거,, 너무 길어도 안팔린대 근데 그래서 한국 레전드 프로게이머인 내가,,,",
+  "publishedAt": "2023-02-16T14:19:49.365Z",
+  "articleId": "<article-id>"
 }
 
-###
+### 에피소드 수정하기
+PATCH http://localhost:8080/episode/<episode-id>
+Content-Type: application/json
+Authorization: Bearer <your-token>
+
+{
+  "episodeId": "<your-episode-id>",
+  "title": "프롤로그",
+  "content": "대충 3화입니다. 뭐 흥미 끌 수 있는 부분으로다가.. ㅖ.. 요새 거,, 너무 길어도 안팔린대 근데 그래서 한국 레전드 프로게이머인 내가,,,",
+  "publishedAt": "2023-02-16T14:19:49.365Z"
+}
 
