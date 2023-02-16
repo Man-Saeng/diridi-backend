@@ -1,5 +1,5 @@
 ### 작품 생성하기
-POST http://localhost:8080/article
+POST {{host}}/article
 Content-Type: application/json
 Authorization: Bearer <your-token>
 
@@ -14,7 +14,7 @@ Authorization: Bearer <your-token>
 }
 
 ### 작품 리스트 불러오기
-GET http://localhost:8080/article
+GET {{host}}/article
 
 ### 작품 상세 불러오기 (쓸 데 없음)
-GET http://localhost:8080/article/<article-id>
+GET {{host}}/article/<article-id>

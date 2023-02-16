@@ -1,13 +1,13 @@
 ### 작품 ID 별로 에피소드 목록 불러오기
-GET http://localhost:8080/episode?articleId=<article-id>&page=0&take=10
+GET {{host}}/episode?articleId=<article-id>&page=0&take=10
 Accept: application/json
 
 ### 에피소드 상세 불러오기
-GET http://localhost:8080/episode/<episode-id>
+GET {{host}}/episode/<episode-id>
 Accept: application/json
 
 ### 에피소드 쓰기
-POST http://localhost:8080/episode
+POST {{host}}/episode
 Content-Type: application/json
 Authorization: Bearer <your-token>
 
@@ -19,7 +19,7 @@ Authorization: Bearer <your-token>
 }
 
 ### 에피소드 수정하기
-PATCH http://localhost:8080/episode/<episode-id>
+PATCH {{host}}/episode/<episode-id>
 Content-Type: application/json
 Authorization: Bearer <your-token>
 
