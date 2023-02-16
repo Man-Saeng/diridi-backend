@@ -1,6 +1,7 @@
 package com.mansaeng.diridibackend.controller
 
-import com.mansaeng.diridibackend.dto.CreateEpisodeRequest
+import com.mansaeng.diridibackend.dto.request.CreateEpisodeRequest
+import com.mansaeng.diridibackend.dto.request.ModifyEpisodeRequest
 import com.mansaeng.diridibackend.entity.article.Episode
 import com.mansaeng.diridibackend.entity.user.User
 import com.mansaeng.diridibackend.service.EpisodeService
@@ -26,10 +27,27 @@ class EpisodeController(private val episodeService: EpisodeService) {
         createEpisodeRequest
     ).mapNotNull { episode -> ResponseEntity.ok(episode.id) }
 
-    @GetMapping("/{articleId}")
+    @GetMapping
     fun getEpisodeListByArticleId(
-        @PathVariable articleId: String,
-        @RequestParam("page") skip: Int = 0, @RequestParam("take") take: Int = 10
+        @RequestParam("articleId") articleId: String,
+        @RequestParam("page") skip: Int?, @RequestParam("take") take: Int?
     ): ResponseEntity<Flux<Episode>> =
-        ResponseEntity.ok(episodeService.getEpisodeListByArticleId(articleId, skip, take))
+        ResponseEntity.ok(episodeService.getEpisodeListByArticleId(articleId, skip ?: 0, take ?: 10))
+
+    @GetMapping("/{episodeId}")
+    fun getEpisodeDetail(
+        @PathVariable("episodeId") episodeId: String
+    ): ResponseEntity<Mono<Episode>> = ResponseEntity.ok(episodeService.getEpisodeDetail(episodeId))
+
+    @PatchMapping("/{episodeId}")
+    fun modifyEpisode(
+        principal: Principal,
+        @PathVariable("episodeId") episodeId: String,
+        @RequestBody modifyEpisodeRequest: ModifyEpisodeRequest
+    ): ResponseEntity<Mono<String>> = ResponseEntity.ok(
+        episodeService.modifyEpisode(
+            (principal as UsernamePasswordAuthenticationToken).principal as User,
+            modifyEpisodeRequest
+        ).mapNotNull { episode -> episode.id }
+    )
 }

@@ -1,10 +1,9 @@
 package com.mansaeng.diridibackend.controller
 
-import com.mansaeng.diridibackend.dto.CreateArticleRequest
+import com.mansaeng.diridibackend.dto.request.CreateArticleRequest
 import com.mansaeng.diridibackend.entity.article.Article
 import com.mansaeng.diridibackend.entity.user.User
 import com.mansaeng.diridibackend.service.ArticleService
-import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.web.bind.annotation.*
@@ -21,20 +20,20 @@ class ArticleController(private val articleService: ArticleService) {
     fun createArticle(
         principal: Principal,
         @RequestBody createArticleRequest: CreateArticleRequest
-    ): Mono<ResponseEntity<String>> = articleService.createArticle(
+    ): Mono<String> = articleService.createArticle(
         (principal as UsernamePasswordAuthenticationToken).principal as User,
         createArticleRequest
-    ).mapNotNull { article -> ResponseEntity.ok(article.id) }
+    ).map { article -> article.id }
 
     @GetMapping
     fun getArticleList(
         @RequestParam("tag") tag: String?,
         @RequestParam("page") skip: Int?,
         @RequestParam("take") take: Int?
-    ): ResponseEntity<Flux<Article>> = ResponseEntity.ok(articleService.getArticleList(tag, skip ?: 0, take ?: 10))
+    ): Flux<Article> = articleService.getArticleList(tag, skip ?: 0, take ?: 10)
 
     @GetMapping("/{articleId}")
     fun getArticleDetail(
         @PathVariable articleId: String
-    ): ResponseEntity<Mono<Article>> = ResponseEntity.ok(articleService.getArticleDetailById(articleId))
+    ): Mono<Article> = articleService.getArticleDetailById(articleId)
 }
