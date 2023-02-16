@@ -1,8 +1,8 @@
 package com.mansaeng.diridibackend.controller
 
 import com.mansaeng.diridibackend.config.security.JwtUtil
-import com.mansaeng.diridibackend.dto.AuthRequest
-import com.mansaeng.diridibackend.dto.AuthResponse
+import com.mansaeng.diridibackend.dto.request.AuthRequest
+import com.mansaeng.diridibackend.dto.response.AuthResponse
 import com.mansaeng.diridibackend.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
