@@ -15,7 +15,7 @@ data class Article(
     var thumbnailImageLink: String = "https://via.placeholder.com/110x165?text=Diridi",
     var writerId: String,
     var category: CategoryType,
-    var status: StatusType = StatusType.PREPARE,
+    var status: StatusType = StatusType.PUBLISH,
     var episodeIds: List<String> = mutableListOf(),
     var tags: List<String> = mutableListOf(),
 
