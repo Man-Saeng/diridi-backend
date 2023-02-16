@@ -13,7 +13,7 @@ data class Episode(
 
     var title: String,
     var content: String,
-    var publishedAt: LocalDateTime,
+    var publishedAt: LocalDateTime?,
     var writerId: String,
     var articleId: String,
 
