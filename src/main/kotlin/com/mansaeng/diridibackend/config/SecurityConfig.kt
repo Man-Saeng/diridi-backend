@@ -42,7 +42,7 @@ class SecurityConfig(
         .authorizeExchange()
         .pathMatchers(HttpMethod.OPTIONS).permitAll()
         .pathMatchers("/login").permitAll()
-        .pathMatchers("/article").permitAll()
+        .pathMatchers("/article/**").permitAll()
         .pathMatchers("/episode/**").permitAll()
         .anyExchange().authenticated()
         .and().build()
