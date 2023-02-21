@@ -44,6 +44,7 @@ class SecurityConfig(
         .pathMatchers("/login").permitAll()
         .pathMatchers("/article/**").permitAll()
         .pathMatchers("/episode/**").permitAll()
+        .pathMatchers("/comment/**").permitAll()
         .anyExchange().authenticated()
         .and().build()
 
