@@ -1,0 +1,14 @@
+### 댓글 쓰기
+POST {{host}}/comment
+Authorization: Bearer <your-token>
+Content-Type: application/json
+
+{
+  "articleId": "<article-id>",
+  "parentId": null,
+  "content": "심플한 1차 댓글"
+}
+
+### 댓글 불러오기
+GET {{host}}/comment?articleId=<article_id>&parentId=<parent-id>
+Accept: application/json
