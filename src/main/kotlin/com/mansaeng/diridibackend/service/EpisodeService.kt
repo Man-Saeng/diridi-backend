@@ -1,6 +1,7 @@
 package com.mansaeng.diridibackend.service
 
 import com.mansaeng.diridibackend.dto.request.CreateEpisodeRequest
+import com.mansaeng.diridibackend.dto.request.LikeEpisodeRequest
 import com.mansaeng.diridibackend.dto.request.ModifyEpisodeRequest
 import com.mansaeng.diridibackend.entity.article.Episode
 import com.mansaeng.diridibackend.entity.user.User
@@ -63,5 +64,33 @@ class EpisodeService(
             }.flatMap { episode ->
                 episodeRepository.save(episode)
             }.switchIfEmpty(Mono.error(RuntimeException("존재하지 않는 episode id 입니다")))
+    }
+
+    fun likeEpisode(user: User, episodeId: String, likeEpisodeRequest: LikeEpisodeRequest): Mono<Boolean> {
+        val (like) = likeEpisodeRequest
+
+        return episodeRepository.findById(episodeId)
+            .mapNotNull { it }
+            .switchIfEmpty(Mono.error(RuntimeException("Episode ID를 확인해주세요")))
+            .flatMap {
+                it as Episode
+                val likedAlready = it.likedUsers.indexOf(user.id) != -1
+                if (like && !likedAlready) {
+                    // 좋아요를 한 적이 없는데, 좋아요를 한 상황
+                    val mutableLikedUsers = it.likedUsers.toMutableList()
+                    mutableLikedUsers.add(user.id)
+                    it.likedUsers = mutableLikedUsers
+                    return@flatMap episodeRepository.save(it)
+                } else if (!like && likedAlready) {
+                    // 좋아요를 한 적이 있는데 좋아요를 취소했을 때
+                    val mutableLikedUsers = it.likedUsers.toMutableList()
+                    mutableLikedUsers.remove(user.id)
+                    it.likedUsers = mutableLikedUsers
+                    return@flatMap episodeRepository.save(it)
+                } else {
+                    Mono.error(RuntimeException("이미 좋아요를 했거나, 좋아요를 취소했습니다."))
+                }
+            }
+            .map { like }
     }
 }
