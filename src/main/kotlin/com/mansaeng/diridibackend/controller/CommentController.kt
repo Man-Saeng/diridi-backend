@@ -1,6 +1,7 @@
 package com.mansaeng.diridibackend.controller
 
 import com.mansaeng.diridibackend.dto.request.CreateCommentRequest
+import com.mansaeng.diridibackend.dto.request.LikeCommentRequest
 import com.mansaeng.diridibackend.entity.comment.Comment
 import com.mansaeng.diridibackend.entity.user.User
 import com.mansaeng.diridibackend.service.CommentService
@@ -30,4 +31,16 @@ class CommentController(private val commentService: CommentService) {
     ): Flux<Comment> {
         return commentService.getCommentsByArticleId(articleId, parentId)
     }
+
+    @PreAuthorize("hasRole('USER')")
+    @PutMapping("/{commentId}/like")
+    fun likeComment(
+        principal: Principal,
+        @PathVariable commentId: String,
+        @RequestBody likeCommentRequest: LikeCommentRequest
+    ): Mono<Boolean> = commentService.likeComment(
+        (principal as UsernamePasswordAuthenticationToken).principal as User,
+        commentId,
+        likeCommentRequest
+    )
 }

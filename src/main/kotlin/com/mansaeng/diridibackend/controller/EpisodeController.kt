@@ -1,6 +1,7 @@
 package com.mansaeng.diridibackend.controller
 
 import com.mansaeng.diridibackend.dto.request.CreateEpisodeRequest
+import com.mansaeng.diridibackend.dto.request.LikeEpisodeRequest
 import com.mansaeng.diridibackend.dto.request.ModifyEpisodeRequest
 import com.mansaeng.diridibackend.entity.article.Episode
 import com.mansaeng.diridibackend.entity.user.User
@@ -49,5 +50,17 @@ class EpisodeController(private val episodeService: EpisodeService) {
             (principal as UsernamePasswordAuthenticationToken).principal as User,
             modifyEpisodeRequest
         ).mapNotNull { episode -> episode.id }
+    )
+
+    @PreAuthorize("hasRole('USER')")
+    @PutMapping("/{episodeId}/like")
+    fun likeEpisode(
+        principal: Principal,
+        @PathVariable episodeId: String,
+        @RequestBody likeEpisodeRequest: LikeEpisodeRequest
+    ): Mono<Boolean> = episodeService.likeEpisode(
+        (principal as UsernamePasswordAuthenticationToken).principal as User,
+        episodeId,
+        likeEpisodeRequest
     )
 }

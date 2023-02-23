@@ -1,6 +1,7 @@
 package com.mansaeng.diridibackend.controller
 
 import com.mansaeng.diridibackend.dto.request.CreateArticleRequest
+import com.mansaeng.diridibackend.dto.request.LikeArticleRequest
 import com.mansaeng.diridibackend.entity.article.Article
 import com.mansaeng.diridibackend.entity.user.User
 import com.mansaeng.diridibackend.service.ArticleService
@@ -36,4 +37,16 @@ class ArticleController(private val articleService: ArticleService) {
     fun getArticleDetail(
         @PathVariable articleId: String
     ): Mono<Article> = articleService.getArticleDetailById(articleId)
+
+    @PreAuthorize("hasRole('USER')")
+    @PutMapping("/{articleId}/like")
+    fun likeArticle(
+        principal: Principal,
+        @PathVariable articleId: String,
+        @RequestBody likeArticleRequest: LikeArticleRequest
+    ): Mono<Boolean> = articleService.likeArticle(
+        (principal as UsernamePasswordAuthenticationToken).principal as User,
+        articleId,
+        likeArticleRequest
+    )
 }
