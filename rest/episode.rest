@@ -30,3 +30,11 @@ Authorization: Bearer <your-token>
   "publishedAt": "2023-02-16T14:19:49.365Z"
 }
 
+### 에피소드 좋아요 하기
+PUT {{host}}/episode/<article-id>/like
+Content-Type: application/json
+Authorization: Bearer <your-token>
+
+{
+  "like": true
+}

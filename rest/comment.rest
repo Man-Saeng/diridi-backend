@@ -12,3 +12,12 @@ Content-Type: application/json
 ### 댓글 불러오기
 GET {{host}}/comment?articleId=<article_id>&parentId=<parent-id>
 Accept: application/json
+
+### 댓글 좋아요 하기
+PUT {{host}}/comment/<comment-id>/like
+Content-Type: application/json
+Authorization: Bearer <your-token>
+
+{
+  "like": true
+}
