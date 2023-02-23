@@ -16,6 +16,7 @@ data class Episode(
     var publishedAt: LocalDateTime?,
     var writerId: String,
     var articleId: String,
+    var likedUsers: List<String> = listOf(),
 
     @CreatedDate
     val createdAt: LocalDateTime = LocalDateTime.now(),

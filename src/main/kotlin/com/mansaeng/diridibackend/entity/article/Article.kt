@@ -18,6 +18,7 @@ data class Article(
     var status: StatusType = StatusType.PUBLISH,
     var episodeIds: List<String> = mutableListOf(),
     var tags: List<String> = mutableListOf(),
+    var likedUsers: List<String> = listOf(),
 
     @CreatedDate
     val createdAt: LocalDateTime = LocalDateTime.now(),

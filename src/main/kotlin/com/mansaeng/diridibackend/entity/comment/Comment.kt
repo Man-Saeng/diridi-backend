@@ -11,6 +11,7 @@ data class Comment(
     val articleId: String,
     val parentId: String?,
     val content: String,
+    var likedUsers: List<String> = listOf(),
 
     @CreatedDate
     val createdAt: LocalDateTime = LocalDateTime.now(),
