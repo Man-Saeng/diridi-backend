@@ -27,3 +27,11 @@ Authorization: Bearer <your-token>
 {
   "like": true
 }
+
+### 특정 유저의 작품 리스트 불러오기
+GET {{host}}/article/user/<user-id>
+# 로그인을 하지 않아도 가능
+
+### 나의 작품 리스트 불러오기
+GET {{host}}/article/my
+Authorization: Bearer <your-token>
