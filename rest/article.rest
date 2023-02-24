@@ -35,3 +35,7 @@ GET {{host}}/article/user/<user-id>
 ### 나의 작품 리스트 불러오기
 GET {{host}}/article/my
 Authorization: Bearer <your-token>
+
+### 내가 좋아요 한 작품 리스트 불러오기
+GET {{host}}/article/my/like
+Authorization: Bearer <your-token>
