@@ -34,6 +34,18 @@ class ArticleService(private val articleRepository: ArticleRepository) {
         )
     }
 
+    fun getArticlesByUser(currentUser: User?, targetUserId: String): Flux<Article> {
+        println(currentUser)
+
+        val isWriter = currentUser?.id == targetUserId
+
+        return if (isWriter) articleRepository.findByWriterId(targetUserId)
+        else articleRepository.findByWriterIdAndStatus(
+            targetUserId,
+            StatusType.PUBLISH
+        )
+    }
+
     fun getArticleDetailById(articleId: String): Mono<Article> = articleRepository.findById(articleId)
 
     fun likeArticle(user: User, articleId: String, likeArticleRequest: LikeArticleRequest): Mono<Boolean> {

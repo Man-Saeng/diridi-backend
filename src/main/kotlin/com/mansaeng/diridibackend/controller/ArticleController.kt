@@ -38,6 +38,24 @@ class ArticleController(private val articleService: ArticleService) {
         @PathVariable articleId: String
     ): Mono<Article> = articleService.getArticleDetailById(articleId)
 
+    @GetMapping("/user/{writerId}")
+    fun getArticlesByUserId(
+        principal: Principal?,
+        @PathVariable writerId: String
+    ): Flux<Article> = articleService.getArticlesByUser(
+        (principal as UsernamePasswordAuthenticationToken?)?.principal as User?,
+        writerId
+    )
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/my")
+    fun getMyArticles(
+        principal: Principal
+    ): Flux<Article> = articleService.getArticlesByUser(
+        (principal as UsernamePasswordAuthenticationToken).principal as User,
+        (principal.principal as User).id,
+    )
+
     @PreAuthorize("hasRole('USER')")
     @PutMapping("/{articleId}/like")
     fun likeArticle(

@@ -15,4 +15,8 @@ interface ArticleRepository : ReactiveCrudRepository<Article, String> {
     fun findByStatusIsNot(status: StatusType, pageable: Pageable): Flux<Article>
 
     fun findByTagsContainingAndStatusIsNot(tag: String?, status: StatusType, pageable: Pageable): Flux<Article>
+
+    fun findByWriterId(writerId: String): Flux<Article>
+
+    fun findByWriterIdAndStatus(writerId: String, status: StatusType): Flux<Article>
 }
