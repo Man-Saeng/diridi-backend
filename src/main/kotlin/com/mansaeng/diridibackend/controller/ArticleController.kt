@@ -57,6 +57,14 @@ class ArticleController(private val articleService: ArticleService) {
     )
 
     @PreAuthorize("hasRole('USER')")
+    @GetMapping("/my/like")
+    fun getLikedArticles(
+        principal: Principal
+    ): Flux<Article> = articleService.getLikedArticles(
+        (principal as UsernamePasswordAuthenticationToken).principal as User
+    )
+
+    @PreAuthorize("hasRole('USER')")
     @PutMapping("/{articleId}/like")
     fun likeArticle(
         principal: Principal,

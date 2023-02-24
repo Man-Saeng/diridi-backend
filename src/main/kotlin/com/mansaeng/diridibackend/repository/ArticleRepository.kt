@@ -19,4 +19,6 @@ interface ArticleRepository : ReactiveCrudRepository<Article, String> {
     fun findByWriterId(writerId: String): Flux<Article>
 
     fun findByWriterIdAndStatus(writerId: String, status: StatusType): Flux<Article>
+
+    fun findByLikedUsersContains(userId: String): Flux<Article>
 }

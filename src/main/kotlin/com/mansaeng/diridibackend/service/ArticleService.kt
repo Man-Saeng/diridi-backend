@@ -48,6 +48,8 @@ class ArticleService(private val articleRepository: ArticleRepository) {
 
     fun getArticleDetailById(articleId: String): Mono<Article> = articleRepository.findById(articleId)
 
+    fun getLikedArticles(user: User): Flux<Article> = articleRepository.findByLikedUsersContains(user.id)
+
     fun likeArticle(user: User, articleId: String, likeArticleRequest: LikeArticleRequest): Mono<Boolean> {
         val (like) = likeArticleRequest
 
